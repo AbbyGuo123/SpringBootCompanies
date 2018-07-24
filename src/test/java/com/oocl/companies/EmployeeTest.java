@@ -44,4 +44,9 @@ public class EmployeeTest {
         List<Employee> employees = employeeServiceImpl.addEmployee(new Employee(20,"1",2,"female",1));
         assertThat(employees.size(),is(size+1));
     }
+    @Test
+    public void should_return_employees_when_call_modifyEmployee(){
+        List<Employee> employees = employeeServiceImpl.modifyEmployee(new Employee(1,"123",2,"female",1));
+        assertThat(employees.get(0).getName(),is("123"));
+    }
 }

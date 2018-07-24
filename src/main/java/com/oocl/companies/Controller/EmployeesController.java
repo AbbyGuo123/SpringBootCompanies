@@ -50,7 +50,12 @@ public class EmployeesController {
         List<Employee> employees= employeeService.addEmployee(employee);
         return employees;
     }
-    
+
+    @PutMapping("")
+    public List<Employee> modifyEmployee(@RequestBody Employee employee){
+        List<Employee> employees = employeeService.modifyEmployee(employee);
+        return employees;
+    }
 
 
 }

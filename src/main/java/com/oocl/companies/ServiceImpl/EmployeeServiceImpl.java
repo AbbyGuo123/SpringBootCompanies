@@ -42,4 +42,15 @@ public class EmployeeServiceImpl implements EmployeeService {
         List<Employee> employees = memoryDB.getEmployees();
         return employees;
     }
+    public List<Employee> modifyEmployee(Employee employee){
+        List<Employee> employees = memoryDB.getEmployees();
+        for(int i=0;i<employees.size();i++){
+            if(employees.get(i).getId()==employee.getId()){
+                employees.get(i).setName(employee.getName());
+                employees.get(i).setAge(employee.getAge());
+                employees.get(i).setGender(employee.getGender());
+            }
+        }
+        return employees;
+    }
 }

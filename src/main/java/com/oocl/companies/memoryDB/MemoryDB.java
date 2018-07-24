@@ -38,4 +38,7 @@ public class MemoryDB {
     public void setCompanies(List<Companies> companies) {
         this.companies = companies;
     }
+    public void addCompanies(Companies companies) {
+        this.companies .add(companies);
+    }
 }

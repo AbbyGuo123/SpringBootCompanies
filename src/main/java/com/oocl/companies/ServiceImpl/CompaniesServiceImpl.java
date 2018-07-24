@@ -17,9 +17,9 @@ public class CompaniesServiceImpl implements CompaniesService {
         List<Companies> companies = memoryDB.getCompanies();
         return companies;
     }
-    public Companies getCompaniesById(int id){
+    public Companies getCompaniesByName(String name){
         List<Companies> companies = memoryDB.getCompanies();
-        Companies companies1 = companies.stream().filter(e->e.getEmployeesNumber()==id).collect(Collectors.toList()).get(0);
+        Companies companies1 = companies.stream().filter(e->e.getCompanyName()==name).collect(Collectors.toList()).get(0);
         return companies1;
     }
     public List<Companies> getCompaniesByPage(int page,int pageSize){
@@ -33,11 +33,12 @@ public class CompaniesServiceImpl implements CompaniesService {
         return filterCompanies;
     }
 
-    /**public List<Employee> addEmployee( Employee employee){
-        memoryDB.addEmployee(employee);
-        List<Employee> employees = memoryDB.getEmployees();
-        return employees;
+    public List<Companies> addCompanies( Companies companies){
+        memoryDB.addCompanies(companies);
+        List<Companies> companies1 = memoryDB.getCompanies();
+        return companies1;
     }
+    /**
     public List<Employee> modifyEmployee(Employee employee){
         List<Employee> employees = memoryDB.getEmployees();
         for(int i=0;i<employees.size();i++){

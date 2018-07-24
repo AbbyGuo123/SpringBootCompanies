@@ -1,9 +1,11 @@
 package com.oocl.companies.Controller;
 
 import com.oocl.companies.Model.Companies;
+import com.oocl.companies.Model.Employee;
 import com.oocl.companies.Service.CompaniesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,4 +28,15 @@ public class CompaniesController {
 public List<Companies> getAllCompanies(){
     return companiesService.getAllCompanies();
 }
+
+    @GetMapping("/{id}")
+    public Companies getCompaniesByID(@PathVariable int id){
+        Companies companies = companiesService.getCompaniesById(id);
+        return companies;
+    }
+    @GetMapping("/page/{page}/pageSize/{pageSize}")
+    public List<Companies> getCompaniesByPage(@PathVariable int page,@PathVariable int pageSize){
+        List<Companies> companies = companiesService.getCompaniesByPage(page,pageSize);
+        return companies;
+    }
 }

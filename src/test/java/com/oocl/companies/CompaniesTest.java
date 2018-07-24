@@ -44,4 +44,13 @@ public class CompaniesTest {
         List<Companies> companiess = companiesServiceImpl.addCompanies(companies);
         assertThat(companiess.size(),is(size+1));
     }
+    @Test
+    public void should_return_companies_when_call_modifyCompanies(){
+        List<Employee> employees = new ArrayList<>();
+        employees.add(new Employee(3,"c",1,"male",1));
+        employees.add(new Employee(4,"d1",1,"male",1));
+        Companies newCompanies1 = new Companies("b",employees.size(),employees);
+        List<Companies> companies = companiesServiceImpl.modifyCompanies(newCompanies1);
+        assertThat(companies.get(0).getCompanyName(),is("a"));
+    }
 }

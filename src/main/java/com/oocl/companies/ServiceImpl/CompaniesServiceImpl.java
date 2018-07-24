@@ -38,18 +38,18 @@ public class CompaniesServiceImpl implements CompaniesService {
         List<Companies> companies1 = memoryDB.getCompanies();
         return companies1;
     }
-    /**
-    public List<Employee> modifyEmployee(Employee employee){
-        List<Employee> employees = memoryDB.getEmployees();
-        for(int i=0;i<employees.size();i++){
-            if(employees.get(i).getId()==employee.getId()){
-                employees.get(i).setName(employee.getName());
-                employees.get(i).setAge(employee.getAge());
-                employees.get(i).setGender(employee.getGender());
+
+    public List<Companies> modifyCompanies(Companies companies){
+        List<Companies> companies1 = memoryDB.getCompanies();
+        for(int i=0;i<companies1.size();i++){
+            if(companies1.get(i).getCompanyName()==companies.getCompanyName()){
+                companies1.get(i).setEmployees(companies.getEmployees());
+                companies1.get(i).setEmployeesNumber(companies.getEmployeesNumber());
             }
         }
-        return employees;
+        return companies1;
     }
+    /**
     public List<Employee> deleteEmployee(int id){
         List<Employee> employees = memoryDB.getEmployees();
         Employee employee = employees.stream().filter(e->e.getId()==id).collect(Collectors.toList()).get(0);

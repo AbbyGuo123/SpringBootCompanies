@@ -9,6 +9,6 @@ public interface CompaniesService {
     public Companies getCompaniesByName(String name);
     public List<Companies> getCompaniesByPage(int page,int pageSize);
     public List<Companies> addCompanies(Companies companies);
-    /**public List<Companies> modifyCompanies(Companies companies);
-    public List<Companies> deleteCompanies(int id);**/
+    public List<Companies> modifyCompanies(Companies companies);
+    //public List<Companies> deleteCompanies(int id);
 }

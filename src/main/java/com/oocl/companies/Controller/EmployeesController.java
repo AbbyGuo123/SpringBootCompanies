@@ -57,5 +57,11 @@ public class EmployeesController {
         return employees;
     }
 
+    @DeleteMapping("/{id}")
+    public List<Employee> deleteEmployee(@PathVariable int id){
+
+        List<Employee> employees = employeeService.deleteEmployee(id);
+        return employees;
+    }
 
 }

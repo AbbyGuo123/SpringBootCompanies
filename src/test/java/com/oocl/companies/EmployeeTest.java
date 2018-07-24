@@ -49,4 +49,11 @@ public class EmployeeTest {
         List<Employee> employees = employeeServiceImpl.modifyEmployee(new Employee(1,"123",2,"female",1));
         assertThat(employees.get(0).getName(),is("123"));
     }
+    @Test
+    public void should_return_employees_when_call_delete_employee_id(){
+        MemoryDB memoryDB = new MemoryDB();
+        int size = memoryDB.getEmployees().size();
+        List<Employee> employees = employeeServiceImpl.deleteEmployee(1);
+        assertThat(employees.size(),is(size-1));
+    }
 }

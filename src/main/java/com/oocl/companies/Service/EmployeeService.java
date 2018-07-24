@@ -12,4 +12,5 @@ public interface EmployeeService {
     public List<Employee> getEmployeesByGender(String gender);
     public List<Employee> addEmployee(@RequestBody Employee employee);
     public List<Employee> modifyEmployee(Employee employee);
+    public List<Employee> deleteEmployee(int id);
 }

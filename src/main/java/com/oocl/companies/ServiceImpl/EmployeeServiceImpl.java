@@ -53,4 +53,10 @@ public class EmployeeServiceImpl implements EmployeeService {
         }
         return employees;
     }
+    public List<Employee> deleteEmployee(int id){
+        List<Employee> employees = memoryDB.getEmployees();
+        Employee employee = employees.stream().filter(e->e.getId()==id).collect(Collectors.toList()).get(0);
+        employees.remove(employee);
+        return employees;
+    }
 }

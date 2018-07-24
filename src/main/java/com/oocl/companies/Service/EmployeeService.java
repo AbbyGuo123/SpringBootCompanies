@@ -1,4 +1,9 @@
 package com.oocl.companies.Service;
 
-public class EmployeeService {
+import com.oocl.companies.Model.Employee;
+
+import java.util.List;
+
+public interface EmployeeService {
+    public Employee getEmployeeById(int id);
 }

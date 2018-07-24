@@ -28,14 +28,20 @@ public class EmployeesController {
 
     }
 
-//    @GetMapping("")
-//    public List<Employee> getAllEmployees(){
-//        return employees;
-//    }
+    @GetMapping("")
+    public List<Employee> getAllEmployees(){
+        return employeeService.getAllEmployees();
+    }
     @GetMapping("/{id}")
     public Employee getEmployeeById(@PathVariable int id){
         Employee employee = employeeService.getEmployeeById(id);
         return employee;
     }
+    @GetMapping("/page/{page}/pageSize/{pageSize}")
+    public List<Employee> getEmployeesByPage(@PathVariable int page,@PathVariable int pageSize){
+        List<Employee> employees = employeeService.getEmployeesByPage(page,pageSize);
+        return employees;
+    }
+
 
 }

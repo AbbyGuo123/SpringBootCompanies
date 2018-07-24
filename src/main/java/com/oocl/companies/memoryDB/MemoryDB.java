@@ -12,6 +12,8 @@ public class MemoryDB {
     public MemoryDB() {
         employees.add(new Employee(1,"a",1,"man",1));
         employees.add(new Employee(2,"a",1,"man",1));
+        employees.add(new Employee(3,"a",1,"man",1));
+        employees.add(new Employee(4,"a",1,"man",1));
     }
 
     public List<Employee> getEmployees() {

@@ -14,7 +14,6 @@ public class CompaniesController {
     @Autowired
     private CompaniesService companiesService;
 
-//    GET       /companies/1/employees  #获取某个具体company下所有employee列表
 
 //    DELETE    /companies/1  #删除某个company以及名下所有employees
 
@@ -27,6 +26,11 @@ public class CompaniesController {
     public Companies getCompaniesByName(@PathVariable String name){
         Companies companies = companiesService.getCompaniesByName(name);
         return companies;
+    }
+    @GetMapping("/{name}/employees")
+    public List<Employee> getEmployeeByCompaniesName(@PathVariable String name){
+        List<Employee> employees = companiesService.getCompaniesByName(name).getEmployees();
+        return employees;
     }
 
     @GetMapping("/page/{page}/pageSize/{pageSize}")
@@ -44,5 +48,11 @@ public class CompaniesController {
     public List<Companies> modifyCompanies(@RequestBody Companies companies){
         List<Companies> companies1 = companiesService.modifyCompanies(companies);
         return companies1;
+    }
+    @DeleteMapping("/{name}")
+    public List<Companies> deleteCompanies(@PathVariable String name){
+
+        List<Companies> companies = companiesService.deleteCompanies(name);
+        return companies;
     }
 }

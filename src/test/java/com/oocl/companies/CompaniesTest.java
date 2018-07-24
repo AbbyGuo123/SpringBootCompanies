@@ -23,7 +23,7 @@ public class CompaniesTest {
         assertThat(employees.size(),not(0));
     }
     @Test
-    public void should_return_companies_when_call_get_Employees_Name(){
+    public void should_return_companies_when_call_get_Name(){
         Companies companies = companiesServiceImpl.getCompaniesByName("a");
         assertThat(companies.getCompanyName(),is("a"));
     }
@@ -52,5 +52,14 @@ public class CompaniesTest {
         Companies newCompanies1 = new Companies("b",employees.size(),employees);
         List<Companies> companies = companiesServiceImpl.modifyCompanies(newCompanies1);
         assertThat(companies.get(0).getCompanyName(),is("a"));
+    }
+    @Test
+    public void should_return_companies_when_call_delete_employee_id(){
+        MemoryDB memoryDB = new MemoryDB();
+        int companiesSize = memoryDB.getCompanies().size();
+        int employeeSize = memoryDB.getEmployees().size();
+        List<Companies> companies = companiesServiceImpl.deleteCompanies("b");
+        assertThat(companies.size(),is(companiesSize-1));
+
     }
 }

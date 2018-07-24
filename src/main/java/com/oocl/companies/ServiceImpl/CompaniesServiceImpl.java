@@ -19,7 +19,7 @@ public class CompaniesServiceImpl implements CompaniesService {
     }
     public Companies getCompaniesByName(String name){
         List<Companies> companies = memoryDB.getCompanies();
-        Companies companies1 = companies.stream().filter(e->e.getCompanyName()==name).collect(Collectors.toList()).get(0);
+        Companies companies1 = companies.stream().filter(e->e.getCompanyName().equals(name)).collect(Collectors.toList()).get(0);
         return companies1;
     }
     public List<Companies> getCompaniesByPage(int page,int pageSize){
@@ -36,24 +36,32 @@ public class CompaniesServiceImpl implements CompaniesService {
     public List<Companies> addCompanies( Companies companies){
         memoryDB.addCompanies(companies);
         List<Companies> companies1 = memoryDB.getCompanies();
+        memoryDB.setCompanies(companies1);
         return companies1;
     }
 
     public List<Companies> modifyCompanies(Companies companies){
         List<Companies> companies1 = memoryDB.getCompanies();
         for(int i=0;i<companies1.size();i++){
-            if(companies1.get(i).getCompanyName()==companies.getCompanyName()){
+            if(companies1.get(i).getCompanyName().equals(companies.getCompanyName())){
                 companies1.get(i).setEmployees(companies.getEmployees());
                 companies1.get(i).setEmployeesNumber(companies.getEmployeesNumber());
             }
         }
+        memoryDB.setCompanies(companies1);
         return companies1;
     }
-    /**
-    public List<Employee> deleteEmployee(int id){
+    public List<Companies> deleteCompanies(String name){
+        List<Companies> companies = memoryDB.getCompanies();
+        Companies companies1 = companies.stream().filter(e->e.getCompanyName().equals(name)).collect(Collectors.toList()).get(0);
         List<Employee> employees = memoryDB.getEmployees();
-        Employee employee = employees.stream().filter(e->e.getId()==id).collect(Collectors.toList()).get(0);
-        employees.remove(employee);
-        return employees;
-    }**/
+        for(int i=0;i<companies1.getEmployees().size();i++){
+            employees.remove(companies1.getEmployees().get(i));
+        }
+
+        companies.remove(companies1);
+        memoryDB.setEmployees(employees);
+        memoryDB.setCompanies(companies);
+        return companies;
+    }
 }

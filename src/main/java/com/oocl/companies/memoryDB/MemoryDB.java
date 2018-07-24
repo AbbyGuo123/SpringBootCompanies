@@ -10,10 +10,10 @@ public class MemoryDB {
     private List<Employee> employees = new ArrayList<>();
 
     public MemoryDB() {
-        employees.add(new Employee(1,"a",1,"man",1));
-        employees.add(new Employee(2,"a",1,"man",1));
-        employees.add(new Employee(3,"a",1,"man",1));
-        employees.add(new Employee(4,"a",1,"man",1));
+        employees.add(new Employee(1,"a",1,"male",1));
+        employees.add(new Employee(2,"a",1,"male",1));
+        employees.add(new Employee(3,"a",1,"male",1));
+        employees.add(new Employee(4,"a",1,"male",1));
     }
 
     public List<Employee> getEmployees() {
@@ -22,5 +22,8 @@ public class MemoryDB {
 
     public void setEmployees(List<Employee> employees) {
         this.employees = employees;
+    }
+    public void addEmployee(Employee employee) {
+        this.employees .add(employee);
     }
 }

@@ -3,8 +3,8 @@ package com.oocl.companies.ServiceImpl;
 import com.oocl.companies.Model.Employee;
 import com.oocl.companies.Service.EmployeeService;
 import com.oocl.companies.memoryDB.MemoryDB;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,5 +31,15 @@ public class EmployeeServiceImpl implements EmployeeService {
             filterEmployees.add(employees.get(i));
         }
         return filterEmployees;
+    }
+    public List<Employee> getEmployeesByGender(String gender){
+        List<Employee> employees = memoryDB.getEmployees();
+        List<Employee> filterEmployees = employees.stream().filter(e->e.getGender().equals(gender)).collect(Collectors.toList());
+        return filterEmployees;
+    }
+    public List<Employee> addEmployee( Employee employee){
+        memoryDB.addEmployee(employee);
+        List<Employee> employees = memoryDB.getEmployees();
+        return employees;
     }
 }

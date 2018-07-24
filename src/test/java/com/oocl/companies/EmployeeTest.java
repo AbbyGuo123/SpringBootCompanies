@@ -3,6 +3,7 @@ package com.oocl.companies;
 import com.oocl.companies.Model.Employee;
 import com.oocl.companies.Service.EmployeeService;
 import com.oocl.companies.ServiceImpl.EmployeeServiceImpl;
+import com.oocl.companies.memoryDB.MemoryDB;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -31,4 +32,16 @@ public class EmployeeTest {
         assertThat(employees.get(0).getId(),is(1));
     }
 
+    @Test
+    public void should_return_filterEmployees_when_call_getEmployeesByGender_input_gender_male(){
+        List<Employee> employees = employeeServiceImpl.getEmployeesByGender("male");
+        assertThat(employees.get(0).getGender(),is("male"));
+    }
+    @Test
+    public void should_return_employees_when_call_addEmployee(){
+        MemoryDB memoryDB = new MemoryDB();
+        int size = memoryDB.getEmployees().size();
+        List<Employee> employees = employeeServiceImpl.addEmployee(new Employee(20,"1",2,"female",1));
+        assertThat(employees.size(),is(size+1));
+    }
 }

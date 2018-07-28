@@ -10,7 +10,7 @@ public interface EmployeeService {
     public List<Employee> getAllEmployees();
     public List<Employee> getEmployeesByPage(int page,int pageSize);
     public List<Employee> getEmployeesByGender(String gender);
-    public List<Employee> addEmployee(@RequestBody Employee employee);
-    public List<Employee> modifyEmployee(Employee employee);
+    public Boolean addEmployee(@RequestBody Employee employee);
+    public Boolean modifyEmployee(Employee employee);
     public List<Employee> deleteEmployee(int id);
 }

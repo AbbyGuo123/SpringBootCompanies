@@ -37,21 +37,21 @@ public class EmployeeServiceImpl implements EmployeeService {
         List<Employee> filterEmployees = employees.stream().filter(e->e.getGender().equals(gender)).collect(Collectors.toList());
         return filterEmployees;
     }
-    public List<Employee> addEmployee( Employee employee){
+    public Boolean addEmployee( Employee employee){
         memoryDB.addEmployee(employee);
-        List<Employee> employees = memoryDB.getEmployees();
-        return employees;
+        return true;
     }
-    public List<Employee> modifyEmployee(Employee employee){
+    public Boolean modifyEmployee(Employee employee){
         List<Employee> employees = memoryDB.getEmployees();
         for(int i=0;i<employees.size();i++){
             if(employees.get(i).getId()==employee.getId()){
                 employees.get(i).setName(employee.getName());
                 employees.get(i).setAge(employee.getAge());
                 employees.get(i).setGender(employee.getGender());
+                return true;
             }
         }
-        return employees;
+        return false;
     }
     public List<Employee> deleteEmployee(int id){
         List<Employee> employees = memoryDB.getEmployees();

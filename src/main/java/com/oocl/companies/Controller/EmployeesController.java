@@ -3,6 +3,8 @@ package com.oocl.companies.Controller;
 import com.oocl.companies.Model.Employee;
 import com.oocl.companies.Service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -46,15 +48,20 @@ public class EmployeesController {
 //    }
 
     @PostMapping("")
-    public List<Employee> addEmployee(@RequestBody Employee employee){
-        List<Employee> employees= employeeService.addEmployee(employee);
-        return employees;
+    public ResponseEntity addEmployee(@RequestBody Employee employee){
+        if(employeeService.addEmployee(employee)){
+            return ResponseEntity.status(HttpStatus.CREATED).build();
+        }
+        else
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
 
     @PutMapping("")
-    public List<Employee> modifyEmployee(@RequestBody Employee employee){
-        List<Employee> employees = employeeService.modifyEmployee(employee);
-        return employees;
+    public ResponseEntity modifyEmployee(@RequestBody Employee employee){
+       if(employeeService.modifyEmployee(employee)){
+           return ResponseEntity.noContent().build();
+       }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
     @DeleteMapping("/{id}")

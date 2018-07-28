@@ -1,6 +1,9 @@
 package com.oocl.companies.Model;
 
+import org.springframework.stereotype.Service;
+
 import java.util.List;
+
 
 public class Companies {
     private String companyName;
@@ -13,8 +16,16 @@ public class Companies {
         this.employees = employees;
     }
 
+    public Companies() {
+    }
+
     public String getCompanyName() {
         return companyName;
+    }
+
+    public Companies(String companyName, int employeesNumber) {
+        this.companyName = companyName;
+        this.employeesNumber = employeesNumber;
     }
 
     public void setCompanyName(String companyName) {

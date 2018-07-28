@@ -1,11 +1,16 @@
 package com.oocl.companies.Model;
 
+import org.springframework.stereotype.Service;
+
 public class Employee {
     private int id;
     private String name;
     private int age;
     private String gender;
     private int salary;
+
+    public Employee() {
+    }
 
     public Employee(int id, String name, int age, String gender, int salary) {
         this.id = id;

@@ -15,9 +15,9 @@ public class MemoryDB {
         employees.add(new Employee(1,"a",1,"male",1));
         employees.add(new Employee(2,"b",1,"male",1));
         companies.add(new Companies("a",employees.size(),employees));
-        employees.add(new Employee(3,"c",1,"male",1));
-        employees.add(new Employee(4,"d",1,"male",1));
-        companies.add(new Companies("b",employees.size(),employees));
+//        employees.add(new Employee(3,"c",1,"male",1));
+//        employees.add(new Employee(4,"d",1,"male",1));
+//        companies.add(new Companies("b",employees.size(),employees));
     }
 
     public List<Employee> getEmployees() {

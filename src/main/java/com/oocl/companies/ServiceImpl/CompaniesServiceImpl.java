@@ -33,11 +33,11 @@ public class CompaniesServiceImpl implements CompaniesService {
         return filterCompanies;
     }
 
-    public List<Companies> addCompanies( Companies companies){
+    public Boolean addCompanies( Companies companies){
         memoryDB.addCompanies(companies);
         List<Companies> companies1 = memoryDB.getCompanies();
         memoryDB.setCompanies(companies1);
-        return companies1;
+        return true;
     }
 
     public List<Companies> modifyCompanies(Companies companies){
@@ -51,17 +51,21 @@ public class CompaniesServiceImpl implements CompaniesService {
         memoryDB.setCompanies(companies1);
         return companies1;
     }
-    public List<Companies> deleteCompanies(String name){
-        List<Companies> companies = memoryDB.getCompanies();
-        Companies companies1 = companies.stream().filter(e->e.getCompanyName().equals(name)).collect(Collectors.toList()).get(0);
-        List<Employee> employees = memoryDB.getEmployees();
-        for(int i=0;i<companies1.getEmployees().size();i++){
-            employees.remove(companies1.getEmployees().get(i));
-        }
+    public Boolean deleteCompanies(String name){
+        List<Companies> companies = memoryDB.getCompanies().stream().filter(e->e.getCompanyName().equals(name)).collect(Collectors.toList());
+        if(companies.size()>0) {
+            Companies companies1 = companies.get(0);
+            List<Employee> employees = memoryDB.getEmployees();
+            for (int i = 0; i < companies1.getEmployees().size(); i++) {
+                employees.remove(companies1.getEmployees().get(i));
+            }
 
-        companies.remove(companies1);
-        memoryDB.setEmployees(employees);
-        memoryDB.setCompanies(companies);
-        return companies;
+            companies.remove(companies1);
+            return true;
+
+        }
+        else
+            return false;
+
     }
 }

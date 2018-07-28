@@ -4,8 +4,11 @@ import com.oocl.companies.Model.Companies;
 import com.oocl.companies.Model.Employee;
 import com.oocl.companies.Service.CompaniesService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -14,13 +17,11 @@ public class CompaniesController {
     @Autowired
     private CompaniesService companiesService;
 
-
-//    DELETE    /companies/1  #删除某个company以及名下所有employees
-
-    @GetMapping("")
+    @GetMapping
     public List<Companies> getAllCompanies(){
-    return companiesService.getAllCompanies();
-}
+        System.out.print(companiesService.getAllCompanies().toString());
+        return companiesService.getAllCompanies();
+    }
 
     @GetMapping("/{name}")
     public Companies getCompaniesByName(@PathVariable String name){
@@ -39,10 +40,12 @@ public class CompaniesController {
         return companies;
     }
 
-    @PostMapping("")
-    public List<Companies> addCompanies(@RequestBody Companies companies){
-        List<Companies> companies1= companiesService.addCompanies(companies);
-        return companies1;
+    @PostMapping(consumes = {"application/json"})
+    public ResponseEntity addCompanies(@Valid  @RequestBody Companies companies){
+        if (companiesService.addCompanies(companies)) {
+            return ResponseEntity.status(HttpStatus.CREATED).build();
+        }
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
     @PutMapping("")
     public List<Companies> modifyCompanies(@RequestBody Companies companies){
@@ -50,9 +53,11 @@ public class CompaniesController {
         return companies1;
     }
     @DeleteMapping("/{name}")
-    public List<Companies> deleteCompanies(@PathVariable String name){
-
-        List<Companies> companies = companiesService.deleteCompanies(name);
-        return companies;
+    public ResponseEntity deleteCompanies(@PathVariable String name){
+        if(companiesService.deleteCompanies(name)){
+            return  ResponseEntity.noContent().build();
+        }
+        else
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 }
